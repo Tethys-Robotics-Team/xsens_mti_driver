@@ -43,7 +43,7 @@ publisher_queue_size: 5
 # 3) 2: Use UTCTime from the host device.
 # Note: Ensure "UTC Time" or "Sample Time Fine" is selected in MT Manager under Device Settings > Output Configurations, 
 # or you could also set 'enable_outputConfig: true' for once to configure output.
-time_option: 0
+time_option: 2
 
 # Logging Configuration
 # ---------------------
@@ -53,14 +53,14 @@ enable_logging: false
 # Transform Frame ID
 # ------------------
 # Default frame_id is "imu_link". Change this if using multiple devices to avoid conflicts.
-# frame_id: "imu_link"
+frame_id: "imu_link"
 
 
 # Sensor Configuration
 # ---------------------------
 # If you want to configure your sensor, firstly set this flag to true, then change desired values for the parameters below.
 # Note: This configuration is required only once, once it is successful, the configurations are stored in the sensor, then you could set this to false.
-enable_deviceConfig: false
+enable_deviceConfig: true
 
 # Sensor Extended Kalman Filter Option Configurations:
 # --------------------------
@@ -68,7 +68,7 @@ enable_deviceConfig: false
 # If you want to configure the filter option, firstly set the 'enable_filter_config', then:
 # For MTi-3/7/8/30/300/G-710/670(G)/680(G): change the 'mti_filter_option' to desired index below for your model.
 # For MTi-620(R)/MTi-630(R): change the 'mti620630filterlabel_rollpitch' and 'mti620630filterlabel_yaw' to the exact labels.
-enable_filter_config: false
+enable_filter_config: true
 # ---------------------------
 # For MTi-670(G): 3 options: 0 = "General", 1 = "GeneralNoBaro", 2 = "GeneralMag"
 # For MTi-680(G), 3 options: 0 = "General_RTK", 1 = "GeneralNoBaro_RTK", 2 = "GeneralMag_RTK"
@@ -77,7 +77,7 @@ enable_filter_config: false
 # For MTi-8: 3 options: 0 = "General_RTK", 1 = "GeneralNoBaro_RTK", 2 = "GeneralMag_RTK"
 # For MTi-300: 0 = "general", 1 = "high_mag_dep", 2 = "dynamic", 3 = "lwo_mag_dep", 4 = "vru_general"
 # For MTI-G-710: 3 options: 0 = "General", 1 = "GeneralNoBaro",  2 = "GeneralMag", 3 = "Automotive", 4 = "HighPerformanceEDR"
-mti_filter_option: 0
+mti_filter_option: 2
 
 # For MTi-620(R) and MTi-630(R) roll pitch options: "Responsive", "General", "Robust"
 mti620630filterlabel_rollpitch: "Robust"
@@ -113,7 +113,7 @@ GNSS_LeverArm: [0.0, 0.0, 0.0]
 # 8 = Airborne < 4g
 # 9 = Wrist
 # Applicable to: MTi-7/8/670(G)/680(G)/G-710 (GNSS/INS versions).
-ublox_platform: 4 
+ublox_platform: 0
 
 # u-blox GNSS Receiver Settings
 # -----------------------------
@@ -130,14 +130,14 @@ pub_utctime: true
 pub_sampletime: true
 pub_imu: true
 pub_quaternion: true
-pub_euler: true
-pub_free_acceleration: true
+pub_euler: false
+pub_free_acceleration: false
 pub_angular_velocity: true
 pub_acceleration: true
 pub_dq: false
 pub_dv: false
 pub_mag: true
-pub_temperature: true
+pub_temperature: false
 pub_pressure: false
 pub_accelerationhr: false #High Rate Data Acceleration, when this is true, set enable_high_rate to true as well
 pub_angular_velocity_hr: false #High Rate Data Angular Velocity,  when this is true, set enable_high_rate to true as well
@@ -197,7 +197,7 @@ enable_inrun_compass_calibration: false
 # Set baudrate
 # ---------------
 #This is necessary if you have hig output rate, and if you see error message of 'data overflow' 
-enable_setting_baudrate: false
+enable_setting_baudrate: true
 #options: 115200, 230400, 460800, 921600, 2000000
 set_baudrate_value: 921600
 
