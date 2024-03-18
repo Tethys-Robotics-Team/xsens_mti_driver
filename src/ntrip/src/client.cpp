@@ -30,40 +30,40 @@ void gnssCallback(const nmea_msgs::Sentence &msg)
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "ntrip_client");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("");
 
-    if (!nh.getParam("/ntrip_node/ip", ip))
+    if (!nh.getParam("ntrip_node/ip", ip))
     {
         ROS_ERROR("Failed to get 'ip' parameter");
         return -1; // Exit if critical parameter not found
     }
-    if (!nh.getParam("/ntrip_node/port", port))
+    if (!nh.getParam("ntrip_node/port", port))
     {
         ROS_ERROR("Failed to get 'port' parameter");
         return -1;
     }
-    if (!nh.getParam("/ntrip_node/user", user))
+    if (!nh.getParam("ntrip_node/user", user))
     {
         ROS_ERROR("Failed to get 'user' parameter");
         return -1;
     }
-    if (!nh.getParam("/ntrip_node/passwd", passwd))
+    if (!nh.getParam("ntrip_node/passwd", passwd))
     {
         ROS_ERROR("Failed to get 'passwd' parameter");
         return -1;
     }
-    if (!nh.getParam("/ntrip_node/mountpoint", mountpoint))
+    if (!nh.getParam("ntrip_node/mountpoint", mountpoint))
     {
         ROS_ERROR("Failed to get 'mountpoint' parameter");
         return -1;
     }
-    if (!nh.getParam("/ntrip_node/report_interval", report_interval))
+    if (!nh.getParam("ntrip_node/report_interval", report_interval))
     {
         report_interval = 1; // Set default value if parameter not found
     }
 
-    ros::Publisher pubRTCM = nh.advertise<mavros_msgs::RTCM>("/rtcm", 10);
-    ros::Subscriber sub = nh.subscribe("/nmea", 100, gnssCallback);
+    ros::Publisher pubRTCM = nh.advertise<mavros_msgs::RTCM>("rtcm", 10);
+    ros::Subscriber sub = nh.subscribe("nmea", 100, gnssCallback);
 
     int seq = 0;
     ntrip_client.Init(ip, port, user, passwd, mountpoint);

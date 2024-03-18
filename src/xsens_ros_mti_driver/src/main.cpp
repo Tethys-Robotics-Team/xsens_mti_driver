@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     if (!xdaInterface.prepare())
         return -1;
 
-    ros::Subscriber sub = node.subscribe("/rtcm", 100, &XdaInterface::rtcmCallback, &xdaInterface);
+    ros::Subscriber sub = node.subscribe("rtcm", 100, &XdaInterface::rtcmCallback, &xdaInterface);
 
     while (ros::ok())
     {
