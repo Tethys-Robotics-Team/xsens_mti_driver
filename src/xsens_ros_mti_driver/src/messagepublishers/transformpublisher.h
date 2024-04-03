@@ -40,12 +40,14 @@
 struct TransformPublisher : public PacketCallback
 {
     tf2_ros::TransformBroadcaster tf_broadcaster;
-    std::string frame_id = DEFAULT_FRAME_ID;
+    std::string tf_frame_id = DEFAULT_TF_FRAME_ID;
+    std::string base_frame_id = DEFAULT_BASE_FRAME_ID;
 
 
     TransformPublisher(ros::NodeHandle &node) : tf_broadcaster()
     {
-        ros::param::get("~frame_id", frame_id);
+        ros::param::get("~tf_frame_id", tf_frame_id);
+        ros::param::get("~base_frame_id", base_frame_id);
     }
 
     void operator()(const XsDataPacket &packet, ros::Time timestamp)
@@ -57,8 +59,8 @@ struct TransformPublisher : public PacketCallback
             XsQuaternion q = packet.orientationQuaternion();
 
             tf.header.stamp = timestamp;
-            tf.header.frame_id = "world";
-            tf.child_frame_id = frame_id;
+            tf.header.frame_id = base_frame_id;
+            tf.child_frame_id = tf_frame_id;
             tf.transform.translation.x = 0.0;
             tf.transform.translation.y = 0.0;
             tf.transform.translation.z = 0.0;

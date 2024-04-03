@@ -54,6 +54,8 @@ enable_logging: false
 # ------------------
 # Default frame_id is "imu_link". Change this if using multiple devices to avoid conflicts.
 frame_id: "imu_link"
+tf_frame_id: "imu_link"
+base_frame_id: "world"
 
 
 # Sensor Configuration
@@ -68,7 +70,7 @@ enable_deviceConfig: true
 # If you want to configure the filter option, firstly set the 'enable_filter_config', then:
 # For MTi-3/7/8/30/300/G-710/670(G)/680(G): change the 'mti_filter_option' to desired index below for your model.
 # For MTi-620(R)/MTi-630(R): change the 'mti620630filterlabel_rollpitch' and 'mti620630filterlabel_yaw' to the exact labels.
-enable_filter_config: true
+enable_filter_config: false
 # ---------------------------
 # For MTi-670(G): 3 options: 0 = "General", 1 = "GeneralNoBaro", 2 = "GeneralMag"
 # For MTi-680(G), 3 options: 0 = "General_RTK", 1 = "GeneralNoBaro_RTK", 2 = "GeneralMag_RTK"
@@ -77,7 +79,7 @@ enable_filter_config: true
 # For MTi-8: 3 options: 0 = "General_RTK", 1 = "GeneralNoBaro_RTK", 2 = "GeneralMag_RTK"
 # For MTi-300: 0 = "general", 1 = "high_mag_dep", 2 = "dynamic", 3 = "lwo_mag_dep", 4 = "vru_general"
 # For MTI-G-710: 3 options: 0 = "General", 1 = "GeneralNoBaro",  2 = "GeneralMag", 3 = "Automotive", 4 = "HighPerformanceEDR"
-mti_filter_option: 4
+mti_filter_option: 0
 
 # For MTi-620(R) and MTi-630(R) roll pitch options: "Responsive", "General", "Robust"
 mti620630filterlabel_rollpitch: "Robust"
@@ -88,7 +90,7 @@ mti620630filterlabel_yaw: "VRUAHS"
 
 # MTi-2/320/200: filter only has VRU, you could enable the AHS options:
 # valid for MTI-2/3/320, MTi-20/30, MTI-200/300 when using the VRU filter options.
-enable_active_heading_stabilization: true
+enable_active_heading_stabilization: false
 
 
 # GNSS Lever Arm Configuration 
@@ -197,9 +199,9 @@ enable_inrun_compass_calibration: false
 # Set baudrate
 # ---------------
 #This is necessary if you have hig output rate, and if you see error message of 'data overflow' 
-enable_setting_baudrate: true
+enable_setting_baudrate: false
 #options: 115200, 230400, 460800, 921600, 2000000
-set_baudrate_value: 921600
+set_baudrate_value: 115200
 
 
 # Manual Gyro Bias Estimation (MGBE) Configuration

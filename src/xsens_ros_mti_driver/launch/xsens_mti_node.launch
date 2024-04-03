@@ -1,9 +1,34 @@
 <launch>
-    <!-- Use groups if you want to launch several nodes for multiple devices.
-    Make sure to use different param files for each sensor. -->
-    <!-- <group ns="sensor_1"> -->
-        <node  name="xsens_mti_node" pkg="xsens_mti_driver" type="xsens_mti_node" output="screen">
-            <rosparam command="load" file="$(find xsens_mti_driver)/param/xsens_mti_node.yaml" />
-        </node>
-    <!-- </group> -->
+
+    <!-- baudrate -->
+    <arg name="baudrate" default="-1"/>
+
+    <!-- filter profiles -->
+    <arg name="mti_filter_option" default="-1"/>
+    <arg name="enable_active_heading_stabilization" default="false"/>
+
+    <!-- frame ids -->
+    <arg name="frame_id" default="imu_link"/>
+    <arg name="tf_frame_id" default="imu_link"/>
+    <arg name="base_frame_id" default="world"/>
+    
+    <node  name="xsens_mti_node" pkg="xsens_mti_driver" type="xsens_mti_node" output="screen">
+        <rosparam command="load" file="$(find xsens_mti_driver)/param/xsens_mti_node.yaml" />
+
+        <!-- baudrate -->
+        <param name="enable_setting_baudrate" type="bool" value="true" if="$(eval baudrate>0)"/>
+        <param name="set_baudrate_value" type="int" value="$(arg baudrate)" if="$(eval baudrate>0)"/>
+
+        <!-- filter profiles -->
+        <param name="enable_filter_config" type="bool" value="true" if="$(eval mti_filter_option>=0)"/>
+        <param name="mti_filter_option" type="int" value="$(arg mti_filter_option)" if="$(eval mti_filter_option>=0)"/>
+        <param name="enable_active_heading_stabilization" type="bool" value="$(arg enable_active_heading_stabilization)"/>
+        
+        <!-- frame ids -->
+        <param name="frame_id" type="str" value="$(arg frame_id)"/>
+        <param name="tf_frame_id" type="str" value="$(arg tf_frame_id)"/>
+        <param name="base_frame_id" type="str" value="$(arg base_frame_id)"/>
+
+    </node>
+
 </launch>
