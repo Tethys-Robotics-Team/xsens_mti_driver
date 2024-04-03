@@ -2,7 +2,19 @@
   <arg name="model" default="$(find xsens_mti_driver)/urdf/MTi_6xx.urdf"/>
   <arg name="rvizconfig" default="$(find xsens_mti_driver)/rviz/display.rviz" />
 
-  <include file="$(find xsens_mti_driver)/launch/xsens_mti_node.launch" />
+  <include file="$(find xsens_mti_driver)/launch/xsens_mti_node.launch">
+    <!-- baudrate -->
+    <arg name="baudrate" default="921600"/>
+
+    <!-- filter profiles -->
+    <arg name="mti_filter_option" default="4"/>
+    <arg name="enable_active_heading_stabilization" default="true"/>
+
+    <!-- frame ids -->
+    <arg name="frame_id" default="imu_link"/>
+    <arg name="tf_frame_id" default="imu_link"/>
+    <arg name="base_frame_id" default="world"/>
+  </include>
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
