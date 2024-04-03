@@ -77,18 +77,18 @@ enable_filter_config: true
 # For MTi-8: 3 options: 0 = "General_RTK", 1 = "GeneralNoBaro_RTK", 2 = "GeneralMag_RTK"
 # For MTi-300: 0 = "general", 1 = "high_mag_dep", 2 = "dynamic", 3 = "lwo_mag_dep", 4 = "vru_general"
 # For MTI-G-710: 3 options: 0 = "General", 1 = "GeneralNoBaro",  2 = "GeneralMag", 3 = "Automotive", 4 = "HighPerformanceEDR"
-mti_filter_option: 2
+mti_filter_option: 4
 
 # For MTi-620(R) and MTi-630(R) roll pitch options: "Responsive", "General", "Robust"
 mti620630filterlabel_rollpitch: "Robust"
 # MTI-620(R) yaw has 2 options: "VRU", "VRUAHS" 
 # MTI-630(R) yaw has 3 options: "FixedMagRef", "NorthReference", "VRU", "VRUAHS" 
-mti620630filterlabel_yaw: "NorthReference"
+mti620630filterlabel_yaw: "VRUAHS"
 
 
 # MTi-2/320/200: filter only has VRU, you could enable the AHS options:
 # valid for MTI-2/3/320, MTi-20/30, MTI-200/300 when using the VRU filter options.
-enable_active_heading_stabilization: false
+enable_active_heading_stabilization: true
 
 
 # GNSS Lever Arm Configuration 
