@@ -1,11 +1,21 @@
 <launch>   
-    <node name="ntrip_node" pkg="ntrip" type="ntrip_node" output="screen" respawn="true" respawn_delay="5">
-        <param name="ip" type="string"  value="rtk2go.com" />  <!-- Change to the IP address of Your NTRIP service-->
-        <param name="port" type="int" value="2101" />  <!-- Change to your port number for WGS84 -->
-        <param name="user" type="string" value="test@gmail.com" /> <!-- Change to your username -->
-        <param name="passwd" type = "string" value="none" /> <!-- Change to your password -->
-        <param name="mountpoint" type = "string" value="NEAR-Swiss" /> <!-- Change to your mountpoint -->
-        <param name="report_interval" type = "int" value="5" /> <!-- the report interval to the NTRIP Caster, default is 1 sec -->
-    </node>
+
+    <arg name="robot_ns" value="$(env robot_id)"/>
+    <arg name="imu_ns" value="field_eval_kit"/>
+    <arg name="mountpoint" value="$(env ntrip_rtk2go_mountpoint)"/>
+
+    <group ns="$(arg robot_ns)">
+        <group ns="$(arg imu_ns)">
+            <node name="ntrip_node" pkg="ntrip" type="ntrip_node" output="screen" respawn="true" respawn_delay="5">
+                <param name="ip" type="string"  value="rtk2go.com" />  <!-- Change to the IP address of Your NTRIP service-->
+                <param name="port" type="int" value="2101" />  <!-- Change to your port number for WGS84 -->
+                <param name="user" type="string" value="test@gmail.com" /> <!-- Change to your username -->
+                <param name="passwd" type = "string" value="none" /> <!-- Change to your password -->
+                <param name="mountpoint" type = "string" value="NEAR-Swiss" /> <!-- Change to your mountpoint -->
+                <param name="report_interval" type = "int" value="5" /> <!-- the report interval to the NTRIP Caster, default is 1 sec -->
+            </node>
+        </group>
+    </group>
+
 </launch>
 
