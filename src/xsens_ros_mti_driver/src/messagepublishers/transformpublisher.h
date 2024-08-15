@@ -57,10 +57,17 @@ struct TransformPublisher : public PacketCallback
             geometry_msgs::TransformStamped tf;
 
             XsQuaternion q = packet.orientationQuaternion();
+            
+            // small hack for convenient tf tree structures
+            // instead of publishing imu_link_ref->imu_link, we instead publish imu_link->imu_link_ref with the inverse quat
+            // this allows a structure like base_link->imu_link->imu_ref, because base_link->imu_link + imu_link_ref->imu_link
+            // would not be allowed (a link can only have one parent)
+            // In summary, this small hack allows the expected tf lookups by flipping the parent and child in the background for the tf tree
+            q = q.inverse();
 
             tf.header.stamp = timestamp;
-            tf.header.frame_id = base_frame_id;
-            tf.child_frame_id = tf_frame_id;
+            tf.header.frame_id = tf_frame_id;  // note the flip
+            tf.child_frame_id = base_frame_id;  // note the flip
             tf.transform.translation.x = 0.0;
             tf.transform.translation.y = 0.0;
             tf.transform.translation.z = 0.0;
